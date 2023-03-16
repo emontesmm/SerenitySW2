@@ -37,12 +37,12 @@ jobs:
       name: Unit and Integration Tests by default fixture
         #        run: mvn clean verify -Dcucumber.filter.tags="@search-product-v1"
       run: mvn clean verify -Dcucumber.filter.tags="@create"
-    - if: ${{ github.event_name == 'workflow_dispatch' && github.event.pull_request.base.ref == 'master' }}
+    - if: ${{ github.event_name == 'workflow_dispatch' }}
       name: Unit and Integration Tests by workflow_dispatch
       run: mvn clean verify -Dcucumber.filter.tags=${{ github.event.inputs.createUsers }}
 
     - name: Upload Results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: TestResults
         path: |
