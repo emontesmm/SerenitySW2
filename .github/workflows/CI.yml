@@ -33,11 +33,11 @@ jobs:
         cache: maven
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - if: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'develop' }}
+    - if: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'master' }}
       name: Unit and Integration Tests by default fixture
         #        run: mvn clean verify -Dcucumber.filter.tags="@search-product-v1"
       run: mvn clean verify -Dcucumber.filter.tags=create
-    - if: ${{ github.event_name == 'workflow_dispatch' && github.event.pull_request.base.ref == 'develop' }}
+    - if: ${{ github.event_name == 'workflow_dispatch' && github.event.pull_request.base.ref == 'master' }}
       name: Unit and Integration Tests by workflow_dispatch
       run: mvn clean verify -Dcucumber.filter.tags=${{ github.event.inputs.createUsers }}
 
